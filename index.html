@@ -3,12 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="index.js"></script>
     <title>Rock Paper Scissors</title>
+    <style>
+        body{
+            margin: 0;
+        }
+
+        .header{
+            text-align: center;
+        }
+
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+        }
+
+        .btn-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 1rem;
+        }
+
+        .choice{
+            margin: 0 1rem 0 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Rock Paper Scissors</h1>
+    <h1 class="header">Rock Paper Scissors</h1>
+    
+    <div class="container">
+        <h2 id="score"></h2>
+        <h2 id="result"></h2>
+        <div class="btn-container">
+            <button class="btn-rock choice" value="rock">Rock</button>
+            <button class="btn-paper choice" value="paper">Paper</button>
+            <button class="btn-scissors choice" value="scissors">Scissors</button>
+        </div>
+    </div>
+    
+    
 
-    <p>The game is running in the console</p>
+
+    <script src="index.js"></script>
 </body>
 </html>

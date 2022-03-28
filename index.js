@@ -1,6 +1,8 @@
 /** computerPlay provides random response of Rock, Paper, or Scissors */
-
+let compChoice = "";
 let score = 0;
+let playerChoice = "";
+let verdict;
 
 let computerPlay = () => {
     let num = Math.floor(Math.random()* 3) +1 ;
@@ -17,54 +19,54 @@ let computerPlay = () => {
     }
 }
 
-let playerChoice = () =>{
-    return prompt('Please choose: Rock, Paper, Scissors').toLowerCase();
-}
-
 let playRound = (compChoice, playerInput) => {
     if(compChoice == 'rock' && playerInput == 'paper'){
         score+= 1;
-        return 'You win! Paper beats rock!';
+        document.getElementById("score").textContent = `Current Score: ${score}`;
+        document.getElementById("result").textContent = "You win! Paper beats rock!";
     }
     else if(compChoice == 'paper' && playerInput == 'scissors'){
         score++;
-        return 'You win! Scissors beats paper!';
+        document.getElementById("score").textContent = `Current Score: ${score}`;
+        document.getElementById("result").textContent = 'You win! Scissors beats paper!';
     }
     else if(compChoice == 'scissors' && playerInput == 'rock'){
         score++;
-        return 'You win! Rock beats scissors!';
+        document.getElementById("score").textContent = `Current Score: ${score}`;
+        document.getElementById("result").textContent = 'You win! Rock beats scissors!';
     }
     else if(compChoice == 'paper' && playerInput == 'rock'){
-        return 'You lose! Paper beats rock!';
+        document.getElementById("result").textContent = 'You lose! Paper beats rock!';
     }
     else if(compChoice == 'scissors' && playerInput == 'paper'){
-        return 'You lose! Scissors beats paper!';
+        document.getElementById("result").textContent = 'You lose! Scissors beats paper!';
     }
     else if(compChoice == 'rock' && playerInput == 'scissors'){
-        return 'You lose! Rock beats scissors!';
+        document.getElementById("result").textContent = 'You lose! Rock beats scissors!';
     }
     else if (compChoice == playerInput){
-        return 'You tied!'
+        document.getElementById("result").textContent = 'You tied!'
     }
     else{
-        return 'Why did you ruin the game?'
+        document.getElementById("result").textContent = 'Why did you ruin the game?'
     }
 }
 
-
-/** game() runs multiple rounds */
 let game = () => {
-    for(let i = 0; i < 5; i++){
-        console.log(i+1);
-        const compChoice = computerPlay();
-        const choice = playerChoice();
-        
-        console.log(`Computer: ${compChoice}`);
-        console.log(`Player: ${choice}`)
-        
-        console.log(playRound(compChoice, choice));
-        console.log(`Current Score: ${score}`);
-    }
+    verdict = playRound(compChoice, playerChoice);
+    return verdict;
 }
 
-game();
+let btns = document.getElementsByClassName("choice")
+
+for(btn of btns){
+    btn.addEventListener("click", (e) => {
+        playerChoice = e.target.value;
+        compChoice = computerPlay();
+        game()
+
+    })
+}
+
+document.getElementById("result").textContent = 'Will you win?';
+document.getElementById("score").textContent = `Current Score: ${score}`;
