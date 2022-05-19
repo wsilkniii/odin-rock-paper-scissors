@@ -5,7 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Rock Paper Scissors</title>
     <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
         body{
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
             margin: 0;
         }
 
@@ -16,9 +24,49 @@
         .container{
             display: flex;
             flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-around;
+            align-items: center;
+            height: 60%;
+            
+        }
+
+        .score-container{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 1rem;
+            border: 1px solid black;
+            width: 60%;
+            padding: 3rem;
+        }
+
+        .lower-half{
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 50vh;
+            margin-bottom: 5rem;
+        }
+
+        #pScore, #cScore {
+            margin: 1rem;
+            border: 1px solid black;
+            padding: 2rem;
+            min-width: 35%;
+            text-align: center;
+        }
+
+        .winning {
+            background-color: rgb(115, 247, 115);
+        }
+
+        .losing {
+            background-color: rgb(217, 95, 95);
+        }
+
+        .tied {
+            background-color: rgb(252, 252, 159);
         }
 
         .btn-container{
@@ -32,6 +80,7 @@
             margin: 0 1rem 0 1rem;
             padding-left: 1rem;
             padding-right: 1rem;
+            font-size: 2.5rem;
         }
 
     </style>
@@ -40,16 +89,23 @@
     <h1 class="header">Rock Paper Scissors</h1>
     
     <div class="container">
-        <h2 id="score"></h2>
-        <h2 id="result"></h2>
-        <div class="btn-container">
-            <button class="btn-rock choice" value="rock">Rock</button>
-            <button class="btn-paper choice" value="paper">Paper</button>
-            <button class="btn-scissors choice" value="scissors">Scissors</button>
+        <div class="score-container">
+            <h2 class="tied" id="pScore">Your Score: 0</h2>
+            <h2 class="tied" id="cScore">Comp Score: 0</h2>
+        </div>
+        <div class="lower-half">
+            <h2 id="result"></h2>
+            <div class="btn-container">
+                <button class="btn-rock choice" value="rock">&#9994</button>
+                <button class="btn-paper choice" value="paper">&#9995</button>
+                <button class="btn-scissors choice" value="scissors">&#9996</button>
+            </div>
         </div>
     </div>
     
-    
+    <footer>
+        <a href="https://www.linkedin.com/in/william-silknitter-611321183/" >LinkedIn</a>
+    </footer>
 
 
     <script src="index.js"></script>

@@ -1,6 +1,7 @@
 /** computerPlay provides random response of Rock, Paper, or Scissors */
 let compChoice = "";
-let score = 0;
+let pScore = 0;
+let cScore = 0;
 let playerChoice = "";
 let verdict;
 
@@ -19,30 +20,43 @@ let computerPlay = () => {
     }
 }
 
+// Runs through round and completes results of match
 let playRound = (compChoice, playerInput) => {
     if(compChoice == 'rock' && playerInput == 'paper'){
-        score+= 1;
-        document.getElementById("score").textContent = `Current Score: ${score}`;
+        pScore++;
+        document.getElementById("pScore").textContent = `Your Score: ${pScore}`;
         document.getElementById("result").textContent = "You win! Paper beats rock!";
+        colorScore(pScore, cScore);
     }
     else if(compChoice == 'paper' && playerInput == 'scissors'){
-        score++;
-        document.getElementById("score").textContent = `Current Score: ${score}`;
+        pScore++;
+        document.getElementById("pScore").textContent = `Your Score: ${pScore}`;
         document.getElementById("result").textContent = 'You win! Scissors beats paper!';
+        colorScore(pScore, cScore);
     }
     else if(compChoice == 'scissors' && playerInput == 'rock'){
-        score++;
-        document.getElementById("score").textContent = `Current Score: ${score}`;
+        pScore++;
+        document.getElementById("pScore").textContent = `Your Score: ${pScore}`;
         document.getElementById("result").textContent = 'You win! Rock beats scissors!';
+        colorScore(pScore, cScore);
     }
     else if(compChoice == 'paper' && playerInput == 'rock'){
+        cScore++;
+        document.getElementById("cScore").textContent = `Comp Score: ${cScore}`;
         document.getElementById("result").textContent = 'You lose! Paper beats rock!';
+        colorScore(pScore, cScore);
     }
     else if(compChoice == 'scissors' && playerInput == 'paper'){
+        cScore++;
+        document.getElementById("cScore").textContent = `Comp Score: ${cScore}`;
         document.getElementById("result").textContent = 'You lose! Scissors beats paper!';
+        colorScore(pScore, cScore);
     }
     else if(compChoice == 'rock' && playerInput == 'scissors'){
+        cScore++;
+        document.getElementById("cScore").textContent = `Comp Score: ${cScore}`;
         document.getElementById("result").textContent = 'You lose! Rock beats scissors!';
+        colorScore(pScore, cScore);
     }
     else if (compChoice == playerInput){
         document.getElementById("result").textContent = 'You tied!'
@@ -57,7 +71,11 @@ let game = () => {
     return verdict;
 }
 
+// Creating array of buttons with class "Choice"
 let btns = document.getElementsByClassName("choice")
+
+// Looping through array of buttons adding an event listener which will set player and comp choices on click
+// then run the game with those choices
 
 for(btn of btns){
     btn.addEventListener("click", (e) => {
@@ -68,5 +86,29 @@ for(btn of btns){
     })
 }
 
+function colorScore(pScore, cScore){
+    let playerScore = document.getElementById("pScore");
+    let compScore = document.getElementById("cScore");
+
+    playerScore.classList.remove(...playerScore.classList);
+    compScore.classList.remove(...compScore.classList);
+
+    if(cScore == pScore){
+        compScore.classList.add('tied');
+        playerScore.classList.add('tied');
+
+    }
+    else if(pScore > cScore){
+        playerScore.classList.add('winning');
+        compScore.classList.add('losing');
+    }
+    else if(cScore > pScore){
+        compScore.classList.add('winning');
+        playerScore.classList.add('losing');
+    }
+    
+}
+
 document.getElementById("result").textContent = 'Will you win?';
-document.getElementById("score").textContent = `Current Score: ${score}`;
+document.getElementById("score").textContent = `Player Score: ${pScore}`;
+document.getElementById("score").textContent = `Comnp Score: ${cScore}`;
